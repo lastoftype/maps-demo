@@ -23,6 +23,7 @@ var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var watch = require('gulp-watch');
+var wiredep = require('wiredep').stream;
 
 
 var config = {
@@ -31,8 +32,8 @@ var config = {
     compile: ['app/assets/scss/main.scss', 'app/assets/scss/vendors.scss']
   },
   js: {
-    watch: ['app/assets/js/*.js','app/assets/js/**/*.js'],
-    compile: ['app/assets/js/*.js','app/assets/js/**/*.js']
+    watch: ['app/assets/js/*.js', 'app/assets/js/**/*.js'],
+    compile: ['app/assets/js/*.js', 'app/assets/js/**/*.js']
   },
   css: 'app/assets/css'
 };
@@ -54,36 +55,6 @@ gulp.task('sass', function() {
     .on('error', gutil.log);
 });
 
-gulp.task('sass:watch', function() {
-  watch(config.sass.watch, function(files) {
-    return files
-      .pipe(sourcemaps.init())
-      .pipe(sass({
-        paths: [path.join(__dirname, 'scss', 'includes')]
-      }))
-      .pipe(sourcemaps.write('../maps'))
-      .pipe(gulp.dest(config.css))
-      .on('error', gutil.log);
-  });
-});
-
-gulp.task('sass:build', function() {
-  return gulp.src('app/assets/scss/*.scss')
-    .pipe(changed('build/css'))
-    .pipe(sourcemaps.init())
-    .pipe(sass({
-      paths: [path.join(__dirname, 'scss', 'includes')]
-    }))
-    .pipe(autoprefixer({
-      browsers: ['last 2 versions'],
-      cascade: false
-    }))
-    .pipe(minifyCss({compatibility: 'ie8'}))
-    .pipe(sourcemaps.write('../maps'))
-    .pipe(gulp.dest('build/css'))
-    .on('error', gutil.log);
-});
-
 // Compile scripts
 gulp.task('scripts', function() {
   return gulp.src(config.js.compile)
@@ -97,8 +68,18 @@ gulp.task('scripts', function() {
     .on('error', gutil.log)
 });
 
+gulp.task('bower', function () {
+  gulp.src('./index.html')
+    .pipe(wiredep())
+    .pipe(gulp.dest('./'));
+});
+
 gulp.task('scripts:watch', function() {
   gulp.watch(config.js.watch, ['scripts']);
 });
 
-gulp.task('default', ['sass:watch']);
+gulp.task('watch', function() {
+  gulp.watch('app/assets/scss/main.scss', ['sass']);
+});
+
+gulp.task('default', ['sass','watch']);

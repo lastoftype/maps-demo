@@ -23,6 +23,8 @@ var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var watch = require('gulp-watch');
+var babel = require('gulp-babel');
+var plumber = require('gulp-plumber');
 var wiredep = require('wiredep').stream;
 
 
@@ -47,6 +49,7 @@ gulp.task('clean', function() {
 
 gulp.task('sass', function() {
   return gulp.src('app/assets/scss/*.scss')
+    .pipe(plumber())
     .pipe(changed(config.css))
     .pipe(sass({
       paths: [path.join(__dirname, 'scss', 'includes')]
@@ -58,18 +61,19 @@ gulp.task('sass', function() {
 // Compile scripts
 gulp.task('scripts', function() {
   return gulp.src(config.js.compile)
+    .pipe(plumber())
+    .pipe(sourcemaps.init())
     .pipe(concat('main.js'))
+    .pipe(babel())
+    // .pipe(uglify())
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest('build/js'))
-    .pipe(filesize())
-    .pipe(uglify())
-    .pipe(rename('main.min.js'))
-    .pipe(gulp.dest('build/js'))
-    .pipe(filesize())
     .on('error', gutil.log)
 });
 
 gulp.task('bower', function () {
   gulp.src('./index.html')
+    .pipe(plumber())
     .pipe(wiredep())
     .pipe(gulp.dest('./'));
 });

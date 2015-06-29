@@ -51,3 +51,14 @@ React.render(
 	<ContactGroup contactCount="10" />,
 	document.getElementById("stuff")
 );
+
+class HelloComponent extends React.Component {  
+  render() {
+    return <div>Hello {this.props.name}</div>;
+  }
+}
+
+React.render(
+	<HelloComponent name="yall" />,
+	document.body
+);

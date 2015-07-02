@@ -1,4 +1,4 @@
-# React code demo
+# React Quiz
 
 Learning some react code
 

@@ -11,3 +11,24 @@
 
 .board.selected {
   border-color: #3BA8AA; }
+
+body {
+  padding: 80px 0 0; }
+
+.answer {
+  background: #ddd;
+  border-radius: 4px;
+  padding: 18px 24px;
+  cursor: pointer;
+  font-size: 2em;
+  line-height: 1em; }
+  .answer:hover {
+    background: #aaa; }
+  .answer.picked {
+    background-color: #64aa6e; }
+    .answer.picked .fa-check {
+      display: inline-block; }
+  .answer .fa-check {
+    font-size: 1em;
+    color: white;
+    display: none; }

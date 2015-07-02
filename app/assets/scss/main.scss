@@ -6,3 +6,32 @@
 .boards { margin: 20px 0; overflow: hidden; }
 .board { border: 5px solid #ccc; float: left; font: 700 24px HelveticaNeue, Helvetica, Arial; margin-right: 20px; padding: 20px; }
 .board.selected { border-color: #3BA8AA; }
+
+
+
+body{
+	padding: 80px 0 0;
+}
+
+.answer{
+	background: #ddd;
+	border-radius: 4px;
+	padding: 18px 24px;
+	cursor: pointer;
+	font-size: 2em;
+	line-height: 1em;
+	&:hover{
+		background: #aaa;
+	}
+	&.picked {
+		background-color: rgb(100,170,110);
+		.fa-check {
+			display: inline-block;
+		}
+	}
+	.fa-check {
+		font-size: 1em;
+		color: white;
+		display: none;
+	}
+}

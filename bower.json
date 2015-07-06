@@ -3,6 +3,12 @@
   "version": "0.1.0",
   "dependencies": {
     "bootstrap-sass": "~3.3.3",
-    "react": "~0.13.3"
+    "d3": "~3.5.5",
+    "topojson": "~1.6.19",
+    "datamaps": "~0.4.0"
+  },
+  "resolutions": {
+    "d3": "~3.3.8",
+    "topojson": "~1.4.3"
   }
 }

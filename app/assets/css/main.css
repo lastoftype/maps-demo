@@ -32,3 +32,26 @@ body {
     font-size: 1em;
     color: white;
     display: none; }
+
+.hoverinfo {
+  background: rgba(0, 0, 0, 0.8) !important;
+  padding: 20px 20px 10px !important;
+  max-width: 400px;
+  border: 1px solid #222 !important;
+  color: white; }
+  @media (max-width: 650px) {
+    .hoverinfo {
+      right: 0 !important;
+      left: 0 !important; } }
+  .hoverinfo h4 {
+    margin: 0 0 10px;
+    font-size: 1.3em; }
+
+@media (max-width: 650px) {
+  .datamaps-hoverover {
+    position: relative !important;
+    left: 0px !important;
+    right: 0px !important;
+    max-width: 100% !important; }
+  .labels {
+    display: none; } }
